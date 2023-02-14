@@ -41,7 +41,7 @@ public partial class Form1 : Form
             }
         }
         
-        goal = new Point(RectX - 2, RectY / 2);
+        goal = new Point(RectX-1, RectY / 2);
         grid[goal.X, goal.Y] = 0;
         grid[start.X, start.Y] = 0;
         for (int i = 0; i < RectX; i++)
@@ -117,7 +117,7 @@ public partial class Form1 : Form
         Paint.Invalidate();
     }
 
-    private bool ProvOutRangeArray(Point point, Point two) => point.X + two.X < 0 || point.X + two.X >= RectX || point.Y + two.Y < 0 || point.Y + two.Y >= RectY;
+    private bool ProvOutRangeArray(Point point, Point two, Point Range_Array) => point.X + two.X < 0 || point.X + two.X > Range_Array.X || point.Y + two.Y < 0 || point.Y + two.Y > Range_Array.Y;
 
     private List<Point> GetNextNodes(int x, int y)
     {
@@ -130,7 +130,7 @@ public partial class Form1 : Form
             {
                 if (Math.Abs(i) == Math.Abs(j))
                     continue;
-                if (ProvOutRangeArray(new Point(i, j), new Point(x + i, y + j)))
+                if (ProvOutRangeArray(new Point(i, j), new Point(x + i, y + j), new Point(RectX, RectY)))
                     continue;
                 if (grid[x + i, y + j] == 1)
                     continue;
